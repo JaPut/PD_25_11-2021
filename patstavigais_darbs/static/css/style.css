@@ -1,0 +1,9 @@
+body{
+    linear-gradient(35deg, rgb(49, 49, 168) , #DDDFD4);
+    color: green;
+}
+
+div {
+  color:red;
+  font-size: 100px;
+}
