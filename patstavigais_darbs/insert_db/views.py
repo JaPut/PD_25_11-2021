@@ -1,7 +1,8 @@
 from django.shortcuts import render
-
+from django.http import HttpResponse
+from .csv_handler import read_and_decode_csv, visit_csv_rows_to_db
 from .models import User
-from .forms import CreateUserForm, FilterUserForm
+from .forms import CreateUserForm, FilterUserForm, UploadCsvForm
 
 def filter(request):
 
@@ -124,4 +125,23 @@ def add_user(request):
         request,
         template_name='add_user.html',
         context=context,
+    )
+
+def upload_csv_row_to_db(request):
+
+    form = UploadCsvForm(request.POST or None, request.FILES or None)
+
+    if request.method == 'POST':
+
+        if form.is_valid():
+
+            decoded_csv = read_and_decode_csv(request.FILES['csv_file'])
+            visit_csv_rows_to_db(decoded_csv)
+
+            return HttpResponse('OK')
+
+    return render(
+        request,
+        template_name='add_user.html',
+        context={'form': form}
     )

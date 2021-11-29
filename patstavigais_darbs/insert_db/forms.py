@@ -2,6 +2,7 @@ from django.forms import (
     Form,
     CharField,
     EmailField,
+    FileField,
 )
 
 
@@ -13,3 +14,6 @@ class CreateUserForm(Form):
 
 class FilterUserForm(Form):
     username = CharField()
+
+class UploadCsvForm(Form):
+    csv_file = FileField()

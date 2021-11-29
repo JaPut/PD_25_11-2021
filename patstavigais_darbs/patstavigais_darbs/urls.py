@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 
 import insert_db.views
 
@@ -22,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', insert_db.views.get_users),
     path('add-user', insert_db.views.add_user),
+    path('add-user/csv', insert_db.views.upload_csv_row_to_db),
     path('simple-user/<int:visit_id>', insert_db.views.get_visit, name='get_visit'),
     path('filter', insert_db.views.filter),
     path('filters', insert_db.views.filters),
